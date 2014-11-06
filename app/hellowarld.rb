@@ -13,12 +13,12 @@ end
 
 get '/person' do
   @person = data
-  data.to_h.to_json
   content_type 'application/json'
+  { :surname =>  data.surname, :firstname => data.firstname }.to_json
 end
 
 patch '/person' do
   payload = JSON.parse request.body.read
-  data[payload.keys.first] = payload.values.first
+  data.send :"#{payload.keys.first}=", payload.values.first
   status 205
 end

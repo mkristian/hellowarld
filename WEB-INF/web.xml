@@ -2,29 +2,20 @@
   "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
   "http://java.sun.com/dtd/web-app_2_3.dtd">
 <web-app>
-<!-- <display-name>Uncomment and put name :here: for Tomcat Dashboard</display-name> -->
-
-
   <context-param>
     <param-name>public.root</param-name>
     <param-value>/</param-value>
   </context-param>
-
   <context-param>
     <param-name>rack.env</param-name>
     <param-value>production</param-value>
   </context-param>
-<!--
-  <servlet>
-    <servlet-name>rack</servlet-name>
-    <servlet-class>org.jruby.rack.RackServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>rack</servlet-name>
-    <url-pattern>/*</url-pattern>
-  </servlet-mapping>
+  <!-- needed for wildfly -->
+  <context-param>
+    <param-name>gem.path</param-name>
+    <param-value>WEB-INF/classes</param-value>
+  </context-param>
 
--->
   <filter>
     <filter-name>RackFilter</filter-name>
     <filter-class>org.jruby.rack.RackFilter</filter-class>
@@ -36,6 +27,4 @@
   <listener>
     <listener-class>org.jruby.rack.RackServletContextListener</listener-class>
   </listener>
-
-
 </web-app>

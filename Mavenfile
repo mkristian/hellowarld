@@ -30,13 +30,27 @@ end
 jruby_plugin!( :gem,
                :includeRubygemsInResources => true )
 
-plugin( :war, '2.2',
-        :webAppSourceDirectory => "${basedir}",
-        :webResources => [ { :directory => '${basedir}',
-                             :targetPath => 'WEB-INF',
-                             :includes => [ 'config.ru' ] } ] )
+# jetty runner 
+##############
 
 #plugin( 'org.mortbay.jetty:jetty-maven-plugin', '8.1.14.v20131031',
 #        :webAppSourceDirectory => "${basedir}" )
 plugin( 'org.eclipse.jetty:jetty-maven-plugin', '9.3.0.M1',
         :webAppSourceDirectory => "${basedir}" )
+
+
+# tomcat runner
+###############
+plugin( 'org.codehaus.mojo:tomcat-maven-plugin', '1.1',
+        :warSourceDirectory => '${basedir}' )
+
+# wildfly runner
+################
+plugin( :war, '2.2',
+        :webAppSourceDirectory => "${basedir}",
+        :webXml => 'WEB-INF/web.xml',
+        :webResources => [ { :directory => '${basedir}',
+                             :targetPath => 'WEB-INF',
+                             :includes => [ 'config.ru' ] } ] )
+
+plugin( 'org.wildfly.plugins:wildfly-maven-plugin:1.0.2.Final' )
