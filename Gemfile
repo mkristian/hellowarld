@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
-gem 'warbler'
-gem 'rake'
+group :development do
+  gem 'warbler'
+  gem 'rake'
+end
+
 gem 'sinatra'
