@@ -14,16 +14,11 @@ end
 get '/person' do
   @person = data
   data.to_h.to_json
+  content_type 'application/json'
 end
 
-patch '/surname' do
+patch '/person' do
   payload = JSON.parse request.body.read
-  data['surname'] = payload['surname']
-  status 205
-end
-
-patch '/firstname' do
-  payload = JSON.parse request.body.read
-  data['firstname'] = payload['firstname']
+  data[payload.keys.first] = payload.values.first
   status 205
 end

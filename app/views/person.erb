@@ -1,53 +1,52 @@
+<!DOCTYPE html>
 <html>
   <head>
     <title><%= @person.firstname %> <%= @person.surname %></title>
-  <script language="JAVASCRIPT" type='text/javascript'>
-<!--
-function createRequest(method, url) {
-  var xhr = new XMLHttpRequest();
-  xhr.open(method, url, true);
-  return xhr;
-}
-function reload(){
-  var url = window.location.href + 'person';
-  var xhr = createRequest('GET', url);
-  xhr.setRequestHeader( "Accept", "application/json" );
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script>
 
-  xhr.onreadystatechange = function() {//Call a function when the state changes.
-	if(xhr.readyState == 4) {
-              payload = JSON.parse(xhr.response);
-              alert(payload.firstname + " " + payload.surname);
-	}
-  }
+$(document).ready(function(){
 
-  xhr.send();
-}
-function update( attribute, value ) {
+  $("#reload").click(function(){
+    $.getJSON("person", function(result) {
+      $("title").text(result.firstname + " " + result.surname);
+    })
+  });
 
-  var url = window.location.href + attribute;
-  var xhr = createRequest('PATCH', url);
-  xhr.setRequestHeader( "Content-Type", "application/json" );
+  $("#firstname").last().click(function(){
+    $.ajax({ url:"person",
+             contentType:"application/json",
+             type:"PATCH",
+             data: '{"firstname":"' + $("#first").val() + '"}',
+             success:function(result){
+    }});
+  });
 
-  xhr.onreadystatechange = function() {//Call a function when the state changes.
-	if(xhr.readyState == 4) {
-              alert("updated");
-	}
-  }
+  $("#surname").last().click(function(){
+    $.ajax({ url:"person",
+             contentType:"application/json",
+             type:"PATCH",
+             data: '{"surname":"' + $("#sur").val() + '"}',
+             success:function(result){
+    }});
+  });
 
-  xhr.send("{\"" + attribute + "\":\"" + value + "\"}");
-}
--->
-</script>
-</head>
+});
+    </script>
+  </head>
   <body>
+
+    <h1>person</h1>
+
     <div>
-      Firstname <input type="text" size="30" id="firstname" value="<%=@person.firstname %>" /> <button onclick="update('firstname', document.getElementById('firstname').value)">update</button>
+      Firstname <input type="text" size="30" id="first" value="<%=@person.firstname %>" /> <button id="firstname">update</button>
     </div>
+
     <div>
-      Surname <input type="text" size="30" id="surname" value="<%=@person.surname %>" /> <button onclick="update('surname', document.getElementById('surname').value)">update</button>
+      Surname <input type="text" size="30"  id="sur" value="<%=@person.surname %>" /> <button id="surname">update</button>
     </div>
-    <div>
-      <button onclick="reload()">reload and show all</button>
-    </div>
-  </body>
+
+     <button id="reload">update title from server data</button>
+
+</body>
 </html>
