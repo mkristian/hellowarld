@@ -4,12 +4,13 @@ gemfile
 
 packaging :war
 
-jar( 'org.jruby.rack:jruby-rack', '1.2.0-SNAPSHOT', 
+jar( 'org.jruby.rack:jruby-rack', '1.1.14', 
      :exclusions => [ 'org.jruby:jruby-complete' ] )
 
-pom 'org.jruby:jruby', '1.7.12'
+pom 'org.jruby:jruby', '${jruby.version}'
 
-properties( 'project.build.sourceEncoding' => 'utf-8'  )
+properties( 'project.build.sourceEncoding' => 'utf-8',
+            'jruby.version' => '1.7.16'  )
 
 resource do
   directory '${basedir}'
