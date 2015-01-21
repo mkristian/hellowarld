@@ -52,6 +52,9 @@ plugin( :war, '2.2',
         :webXml => 'WEB-INF/web.xml',
         :webResources => [ { :directory => '${basedir}',
                              :targetPath => 'WEB-INF',
-                             :includes => [ 'config.ru' ] } ] )
+                             :includes => [ 'config.ru' ] },
+                           { :directory => '${basedir}/WEB-INF',
+                             :targetPath => 'WEB-INF',
+                             :includes => [ 'init.rb' ] } ] )
 
 plugin( 'org.wildfly.plugins:wildfly-maven-plugin:1.0.2.Final' )
