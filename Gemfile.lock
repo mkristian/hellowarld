@@ -1,23 +1,38 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    jruby-jars (1.7.13)
-    jruby-rack (1.1.16)
+    axiom-types (0.1.1)
+      descendants_tracker (~> 0.0.4)
+      ice_nine (~> 0.11.0)
+      thread_safe (~> 0.3, >= 0.3.1)
+    coercible (1.0.0)
+      descendants_tracker (~> 0.0.1)
+    descendants_tracker (0.0.4)
+      thread_safe (~> 0.3, >= 0.3.1)
+    equalizer (0.0.9)
+    ice_nine (0.11.1)
+    maven-tools (1.0.7)
+      virtus (~> 1.0)
     rack (1.5.2)
     rack-protection (1.5.3)
       rack
     rake (10.3.2)
-    rubyzip (1.1.6)
+    ruby-maven (3.1.1.0.8)
+      maven-tools (~> 1.0.1)
+      ruby-maven-libs (= 3.1.1)
+    ruby-maven-libs (3.1.1)
     sinatra (1.4.5)
       rack (~> 1.4)
       rack-protection (~> 1.4)
       tilt (~> 1.3, >= 1.3.4)
+    thread_safe (0.3.4)
+    thread_safe (0.3.4-java)
     tilt (1.4.1)
-    warbler (1.4.4)
-      jruby-jars (>= 1.5.6, < 2.0)
-      jruby-rack (>= 1.0.0)
-      rake (>= 0.9.6)
-      rubyzip (>= 0.9, < 1.2)
+    virtus (1.0.4)
+      axiom-types (~> 0.1)
+      coercible (~> 1.0)
+      descendants_tracker (~> 0.0, >= 0.0.3)
+      equalizer (~> 0.0, >= 0.0.9)
 
 PLATFORMS
   java
@@ -25,5 +40,5 @@ PLATFORMS
 
 DEPENDENCIES
   rake
+  ruby-maven
   sinatra
-  warbler

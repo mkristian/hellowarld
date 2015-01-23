@@ -6,13 +6,13 @@ data = OpenStruct.new
 data.surname = 'meier'
 data.firstname = 'christian'
 
-get '/' do
+get '/me' do
   @person = data
   erb :person
 end
 
 get '/person' do
-  @person = data
+  p @person = data
   content_type 'application/json'
   { :surname =>  data.surname, :firstname => data.firstname }.to_json
 end

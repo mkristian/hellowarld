@@ -4,10 +4,13 @@ gemfile
 
 packaging :war
 
-jar( 'org.jruby.rack:jruby-rack', '1.1.14', 
+jar( 'org.jruby.rack:jruby-rack', '1.1.18', 
      :exclusions => [ 'org.jruby:jruby-complete' ] )
 
 pom 'org.jruby:jruby', '${jruby.version}'
+
+jar 'io.dropwizard.metrics:metrics-servlet:3.1.0'
+jar 'javax.servlet:servlet-api:2.5'
 
 properties( 'project.build.sourceEncoding' => 'utf-8',
             'jruby.version' => '1.7.16'  )
