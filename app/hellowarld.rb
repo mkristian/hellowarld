@@ -6,8 +6,8 @@ data = OpenStruct.new
 data.surname = 'meier'
 data.firstname = 'christian'
 
-get '/me' do
-  @person = data
+get '/app' do
+  p @person = data
   erb :person
 end
 
