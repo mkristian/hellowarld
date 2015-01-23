@@ -9,11 +9,13 @@ jar( 'org.jruby.rack:jruby-rack', '1.1.18',
 
 pom 'org.jruby:jruby', '${jruby.version}'
 
-jar 'io.dropwizard.metrics:metrics-servlet:3.1.0'
+jar 'io.dropwizard.metrics:metrics-servlet:${dropwizard.metrics.version}'
+jar 'io.dropwizard.metrics:metrics-servlets:${dropwizard.metrics.version}'
 jar 'javax.servlet:servlet-api:2.5'
 
 properties( 'project.build.sourceEncoding' => 'utf-8',
-            'jruby.version' => '1.7.16'  )
+            'jruby.version' => '1.7.16',
+            'dropwizard.metrics.version' => '3.1.0')
 
 resource do
   directory '${basedir}'
