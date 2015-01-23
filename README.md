@@ -12,15 +12,15 @@ run the application in a webserver like jetty
 
 via
 
-    http://localhost:8080/app
+    <http://localhost:8080/app>
 
 the metrics are here:
 
-    http://localhost:8080/metrics?pretty=true
+    <http://localhost:8080/metrics?pretty=true>
 
 or a current thread dump
 
-    http://localhost:8080/threads
+    <http://localhost:8080/threads>
 
 or choose one of those:
 
@@ -29,7 +29,7 @@ or choose one of those:
 
 they are all configured to be accessible with the baseurl:
 
-    http://localhost:8080/hellowarld
+    <http://localhost:8080/hellowarld>
 
 ## config
 
