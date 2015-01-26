@@ -2,7 +2,6 @@ require 'singleton'
 require_relative 'dropwizard'
 
 class Instrumented < Dropwizard
-  include Singleton
   
   NAME_PREFIX = "responseCodes."
   OK = 200;
@@ -13,8 +12,8 @@ class Instrumented < Dropwizard
   NOT_FOUND = 404;
   SERVER_ERROR = 500;
 
-  def initialize(name = 'dropwizard')
-    super( name,
+  def initialize(metrics, name = 'dropwizard')
+    super( metrics, name,
            { OK => NAME_PREFIX + "ok",
              CREATED => NAME_PREFIX + "created",
              NO_CONTENT => NAME_PREFIX + "noContent",
@@ -36,9 +35,9 @@ module Rack
   module Dropwizard
     class Instrumented
       
-      def initialize(app)
+      def initialize(app, instrumented)
         @app = app
-        @dropwizard = ::Instrumented.instance
+        @dropwizard = instrumented
       end
       
       def call(env)
@@ -54,8 +53,9 @@ module Rack
                                           true,
                                           MetricFilter::ALL))
 
-      def initialize(app)
+      def initialize(app, metrics)
         @app = app
+        @metrics = metrics
       end
       
       def call(env)
@@ -74,7 +74,7 @@ module Rack
 
       def metrics_json( env )
         output = java.io.ByteArrayOutputStream.new
-        writer( env ).writeValue(output, ::Metrics.instance);
+        writer( env ).writeValue(output, @metrics);
         output.to_s
       end
 

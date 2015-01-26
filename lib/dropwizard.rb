@@ -2,9 +2,8 @@ require_relative 'metrics'
 
 class Dropwizard
 
-  def initialize( name, meter_names_by_status_code = {} )
-    metrics = Metrics.instance
-    @meters_by_status_code = {}
+  def initialize( metrics, name, meter_names_by_status_code = {} )
+    @meters_by_status_code = java.util.concurrent.ConcurrentHashMap.new
     meter_names_by_status_code.each do |k,v|
       @meters_by_status_code[ k ] = metrics.meter(MetricRegistry.name(name, v))
     end

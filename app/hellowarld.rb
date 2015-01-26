@@ -1,6 +1,18 @@
 require 'sinatra'
 require 'json'
 require 'ostruct'
+require 'lib/instrumented'
+
+configure do
+  # share the metrics
+  metrics = MetricRegistry.new
+  set :metrics, metrics
+
+  use Rack::Dropwizard::Metrics, metrics
+
+  # use on instrumented instance for all requests - must be thread-safe
+  use Rack::Dropwizard::Instrumented, Instrumented.new( metrics )
+end
 
 data = OpenStruct.new
 data.surname = 'meier'
@@ -17,7 +29,8 @@ class DataLengthGauge
     @data.surname.length + @data.firstname.length
   end
 end
-Metrics.instance.register(MetricRegistry.name('app', 'data_length'), DataLengthGauge.new( data ) )
+
+settings.metrics.register('app.data_length', DataLengthGauge.new( data ) )
 
 get '/app' do
   p @person = data

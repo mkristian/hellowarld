@@ -5,10 +5,3 @@ rescue
   require 'jbundler'
   retry
 end
-
-class Metrics
-
-  def self.instance
-    @instance ||= MetricRegistry.new
-  end
-end
