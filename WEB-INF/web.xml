@@ -16,6 +16,7 @@
     <param-value>WEB-INF/classes</param-value>
   </context-param>
 
+  <!--
   <servlet>
     <servlet-name>threads</servlet-name>
     <servlet-class>com.codahale.metrics.servlets.ThreadDumpServlet</servlet-class>
@@ -41,20 +42,24 @@
       <param-value>app</param-value>
     </init-param>
   </filter>
+-->
   <filter>
     <filter-name>RackFilter</filter-name>
     <filter-class>org.jruby.rack.RackFilter</filter-class>
   </filter>
 
+<!--
   <filter-mapping>
     <filter-name>instrumentedFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+-->
   <filter-mapping>
     <filter-name>RackFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
 
+<!--
   <listener>
     <listener-class>MyMetricsServletContextListener</listener-class>
   </listener>
@@ -64,6 +69,7 @@
   <listener>
     <listener-class>MyInstrumentedFilterContextListener</listener-class>
   </listener>
+-->
   <listener>
     <listener-class>org.jruby.rack.RackServletContextListener</listener-class>
   </listener>
