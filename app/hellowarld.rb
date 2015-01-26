@@ -4,33 +4,23 @@ require 'ostruct'
 require 'lib/instrumented'
 
 configure do
-  # share the metrics
-  metrics = MetricRegistry.new
-  set :metrics, metrics
+  registry = Registry.new
+  set :metrics, registry
 
-  use Rack::Dropwizard::Metrics, metrics
+  # share the metrics
+  use Rack::Dropwizard::Metrics, registry.metrics
 
   # use on instrumented instance for all requests - must be thread-safe
-  use Rack::Dropwizard::Instrumented, Instrumented.new( metrics )
+  use Rack::Dropwizard::Instrumented, Instrumented.new( registry.metrics )
 end
 
 data = OpenStruct.new
 data.surname = 'meier'
 data.firstname = 'christian'
 
-class DataLengthGauge
-  include com.codahale.metrics.Gauge
-  
-  def initialize( data )
-    @data = data
-  end
-
-  def value
-    @data.surname.length + @data.firstname.length
-  end
+settings.metrics.register_gauge('app.data_length' ) do
+  data.surname.length + data.firstname.length
 end
-
-settings.metrics.register('app.data_length', DataLengthGauge.new( data ) )
 
 get '/app' do
   p @person = data

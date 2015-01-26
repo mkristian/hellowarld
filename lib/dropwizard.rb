@@ -1,5 +1,31 @@
 require_relative 'metrics'
 
+class Registry
+
+  class Gauge
+    include com.codahale.metrics.Gauge
+    
+    def initialize( data )
+      @data = data
+    end
+    
+    def value
+      @data.call
+    end
+  end
+
+  attr_reader :metrics
+
+  def initialize
+    @metrics = MetricRegistry.new
+  end
+
+  def register_gauge( name, obj = nil, &block )
+    @metrics.register( name, obj || Guage.new( block ) )
+  end
+
+end
+
 class Dropwizard
 
   def initialize( metrics, name, meter_names_by_status_code = {} )
