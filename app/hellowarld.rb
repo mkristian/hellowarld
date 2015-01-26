@@ -6,6 +6,19 @@ data = OpenStruct.new
 data.surname = 'meier'
 data.firstname = 'christian'
 
+class DataLengthGauge
+  include com.codahale.metrics.Gauge
+  
+  def initialize( data )
+    @data = data
+  end
+
+  def value
+    @data.surname.length + @data.firstname.length
+  end
+end
+Metrics.instance.register(MetricRegistry.name('app', 'data_length'), DataLengthGauge.new( data ) )
+
 get '/app' do
   p @person = data
   erb :person
