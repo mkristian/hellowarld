@@ -1,10 +1,11 @@
 ---
 :runtime:
+- io.dropwizard.metrics:metrics-healthchecks:jar:3.1.0
 - com.fasterxml.jackson.core:jackson-annotations:jar:2.4.0
 - com.fasterxml.jackson.core:jackson-core:jar:2.4.2
 - org.bouncycastle:bcprov-jdk15on:jar:1.47
 - org.slf4j:slf4j-api:jar:1.7.7
 - org.bouncycastle:bcpkix-jdk15on:jar:1.47
-- io.dropwizard.metrics:metrics-core:jar:3.1.0
 - com.fasterxml.jackson.core:jackson-databind:jar:2.4.2
+- io.dropwizard.metrics:metrics-core:jar:3.1.0
 - io.dropwizard.metrics:metrics-json:jar:3.1.0
